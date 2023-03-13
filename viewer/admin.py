@@ -1,3 +1,5 @@
+from viewer.models import *
 from django.contrib import admin
 
-# Register your models here.
+admin.site.register(Note)
+admin.site.register(Category)
