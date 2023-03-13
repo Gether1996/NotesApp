@@ -14,17 +14,21 @@
 
     <h1>My notes</h1>
 <div style="display: inline-block;">
-  <button class="btn-add"><a href="http://127.0.0.1:8000/add_category/">Add category</a></button>
+  <button class="btn-add"><a href="http://127.0.0.1:8000/add_category/" style="text-decoration: none; color: white;">Add category</a></button>
 </div>
 <div style="display: inline-block;">
-  <button class="btn-add" style="font-size: 40px;"><a href="http://127.0.0.1:8000/add_note/"><i class='fa fa-pencil-square-o'></i></a></button>
+  <button class="btn-add" style="font-size: 40px;"><a href="http://127.0.0.1:8000/add_note/" style="color: black;"><i class='fa fa-pencil-square-o'></i></a></button>
 </div>
 {% for note in notes %}
     <div class="note">
         <div class="note-content">
-            <p>{{ note.category.name }}</p>
-            <p>{{ note.name }}</p>
+            <h2>{{ note.category.name }}</h2>
+            <h1>{{ note.name }}</h1>
             <p>{{ note.description }}</p>
+            <p>Deadline: {{ note.scheduled_time }}</p>
+            {% if note.scheduled_time %}
+                <div class="scheduled-time-indicator {% if note.finished %}finished{% endif %}"></div>
+            {% endif %}
         </div>
         <div class="note-actions">
             <a href="http://127.0.0.1:8000/notes/{{ note.id }}/edit/"><button class="edit-note"><i class="fa fa-pencil"></i></button></a>

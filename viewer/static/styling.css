@@ -90,10 +90,11 @@ select option {
 
 .note {
   background-color: #f9f9f9;
-  border: 1px solid #ddd;
-  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.9);
+  border: 2px solid #ddd;
+  box-shadow: 3px 3px 8px rgba(0, 0, 0, 2);
   padding: 20px;
   margin-bottom: 20px;
+  margin-left: 20px;
   width: 300px;
 }
 
@@ -129,6 +130,10 @@ select option {
 .btn-add {
     margin: 30px;
     cursor: pointer;
+    background-color: #4FC3F7;
+    border: 1px;
+    font-size: 26px;
+    color: white;
 }
 
 .edit-note:hover {
@@ -147,4 +152,21 @@ select option {
   background-color: #22661c;
   transition: background-color 0.3s ease;
   cursor: pointer;
+}
+
+.scheduled-time-indicator {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.scheduled-time-indicator.finished {
+    background-color: green;
+}
+
+.scheduled-time-indicator:not(.finished) {
+    background-color: red;
 }

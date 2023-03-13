@@ -13,4 +13,7 @@ class NoteForm(forms.ModelForm):
         model = Note
         fields = "__all__"
         exclude = ["user"]
+        widgets = {
+            'scheduled_time': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+        }
 

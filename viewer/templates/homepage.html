@@ -5,11 +5,13 @@
 {% load static %}
 <body>
     <link rel="stylesheet" href="{% static 'styling.css' %}">
-
-    <h1>Welcome to Notepad app!</h1>
-    <h2>In this app, you can add notes with various filters.</h2>
-    <h2>To begin, you need to be logged into our site.</h2>
-
+    {% if request.user.is_authenticated %}
+        <h1>Welcome {{ request.user.username }}!</h1>
+    {% else %}
+        <h1>Welcome to Notepad app!</h1>
+        <h2>In this app, you can add notes with various filters.</h2>
+        <h2>To begin, you need to be logged into our site.</h2>
+    {% endif %}
 
 </body>
 {% endblock %}
