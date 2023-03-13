@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Navigation Bar</title>
+</head>
+<body>
+
+<nav>
+  <div class="navbar-left">
+    <button><a href="{% url 'homepage' %}">My notes</a></button>
+  </div>
+  <div class="navbar-right">
+    <select onchange="location = this.value;">
+      <option hidden disabled selected>User</option>
+      <option value="{% url 'registration' %}">Register</option>
+    {% if request.user.is_authenticated %}
+      <option value="{% url 'logout' %}">Logout</option>
+    {% else %}
+      <option value="{% url 'login' %}">Login</option>
+    {% endif %}
+    </select>
+  </div>
+</nav>
+
+</body>
+</html>
+

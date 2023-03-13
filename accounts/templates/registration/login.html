@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'styling.css' %}">
+
+
+        <h1>Login</h1>
+<table class="sign_up_table">
+    <form method="post" >
+        {% csrf_token %}
+        {% for field in form %}
+    <tr>
+      <th>{{ field.label_tag }}</th>
+      <td>{{ field }}</td>
+    </tr>
+  {% endfor %}
+      <button class="login_btn" type="submit" id="id_submit" >Login</button>
+    </form>
+</table>
+
+<h4 style="margin-left: 22px; ">You can <a href="{% url 'registration' %}" id="id_sign_up">sign up here</a>.</h4>
+
+
+{% endblock %}
