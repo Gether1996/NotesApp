@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'styling.css' %}">
+  <div>
+    <form method="post" action="{% url 'edit_note' note_id %}" >
+      {% csrf_token %}
+      <table>{{ form }}</table>
+      <button type="submit">Save</button>
+    </form>
+  </div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}New category{% endblock %}
+
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'styling.css' %}">
+  <div>
+    <form method="post" action="{% url 'add_category' %}">
+      {% csrf_token %}
+      <table>{{ form }}</table>
+      <button type="submit">Save</button>
+    </form>
+  </div>
+{% endblock %}

@@ -87,3 +87,64 @@ select option {
 .sign_up_btn:hover {
   background-color: #2196F3;
 }
+
+.note {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.9);
+  padding: 20px;
+  margin-bottom: 20px;
+  width: 300px;
+}
+
+.note-content {
+  position: relative;
+}
+
+.note-actions button {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+  border: none;
+
+}
+
+.edit-note {
+  background-color: #4FC3F7;
+  font-size: 30px;
+}
+
+
+.delete-note {
+  background-color: #e15d5d;
+  font-size: 30px;
+}
+
+.finish-note {
+  background-color: #45b93b;
+  font-size: 30px;
+}
+
+.btn-add {
+    margin: 30px;
+    cursor: pointer;
+}
+
+.edit-note:hover {
+  background-color: #2196F3;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.delete-note:hover {
+  background-color: #932314;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.finish-note:hover {
+  background-color: #22661c;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}

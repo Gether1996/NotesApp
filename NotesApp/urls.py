@@ -27,4 +27,9 @@ urlpatterns = [
     path('registration/', registration, name='registration'),
     path('accounts/profile/', profile, name='profile'),
     path('user_notes/', user_notes, name='user_notes'),
+    path('add_note/', add_note, name='add_note'),
+    path('add_category/', add_category, name='add_category'),
+    path('notes/<int:note_id>/edit/', edit_note, name='edit_note'),
+    path('notes/<int:note_id>/delete/', delete_note, name='delete_note'),
+    path('notes/<int:note_id>/finish/', finish_note, name='finish_note'),
 ]
