@@ -1,43 +1,68 @@
+h1 {
+    margin-left: 20px;
+}
+
+body {
+    margin: 0;
+    background-image: url('background/background.png' );
+    background-size: cover;
+}
 
 nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 60px;
-  background-color: #1abc9c;
+  background-color: #4FC3F7;
   padding: 0 20px;
+  margin: 0;
+}
+
+select option {
+  font-size: 1.2rem;
 }
 
 .navbar-left button {
-  background-color: transparent;
-  border: none;
-  color: white;
-  font-size: 1.2rem;
-  cursor: pointer;
+    background-color: #4FC3F7;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 22px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.navbar-left button:hover {
+    background-color: #2196F3;
 }
 
 .navbar-right select {
-  background-color: #1abc9c;
-  color: white;
-  border: none;
-  font-size: 1rem;
-  cursor: pointer;
-  appearance: none;
+    background-color: #4FC3F7;
+    color: #fff;
+    border: none;
+    padding: 10px 10px;
+    font-size: 22px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
 }
 
 .navbar-right option {
-  background-color: #1abc9c;
+  background-color: #4FC3F7;
   color: white;
   cursor: pointer;
 }
 
 .navbar-right select:hover {
-  background-color: #2980b9;
+  background-color: #2196F3;
   transition: background-color 0.3s ease;
 }
 
 .navbar-right option:hover {
-  background-color: #2980b9;
+  background-color: #2196F3;
   transition: background-color 0.3s ease;
 }
 
@@ -45,10 +70,9 @@ nav {
     margin-left: 500 px;
 }
 
-/* Style the submit button */
 .sign_up_btn {
   margin-top: 20px;
-  background-color: #1abc9c;
+  background-color: #4FC3F7;
   border: none;
   color: white;
   padding: 10px 20px;
@@ -60,11 +84,6 @@ nav {
   cursor: pointer;
 }
 
-/* Add hover effect to the button */
 .sign_up_btn:hover {
-  background-color: #16a085;
-}
-
-select option .fas {
-    margin-right: 5px; /* Add some spacing between the icon and text */
+  background-color: #2196F3;
 }

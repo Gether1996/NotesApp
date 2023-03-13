@@ -8,16 +8,20 @@
 
 <nav>
   <div class="navbar-left">
-    <button><a href="{% url 'homepage' %}">My notes</a></button>
+    <a href="{% url 'homepage' %}"><button>My notes</button></a>
   </div>
   <div class="navbar-right">
     <select onchange="location = this.value;">
       <option hidden disabled selected>User</option>
-      <option value="{% url 'registration' %}">Register</option>
+    {% if perms.viewer %}
+      <option value="http://127.0.0.1:8000/admin">Admin</option>
+    {% endif %}
     {% if request.user.is_authenticated %}
+      <option value="http://127.0.0.1:8000/accounts/profile/">Profile</option>
       <option value="{% url 'logout' %}">Logout</option>
     {% else %}
       <option value="{% url 'login' %}">Login</option>
+      <option value="{% url 'registration' %}">Register</option>
     {% endif %}
     </select>
   </div>

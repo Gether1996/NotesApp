@@ -4,5 +4,7 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'styling.css' %}">
 
-<h1>Hello {{ request.user.username }}</h1>
+<h1>{{ request.user.username }}</h1>
+
+
 {% endblock %}
