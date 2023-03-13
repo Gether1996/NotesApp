@@ -9,6 +9,7 @@
 <nav>
   <div class="navbar-left">
   {% if request.user.is_authenticated %}
+    <a href="{% url 'homepage' %}"><button>Home</button></a>
     <a href="{% url 'user_notes' %}"><button>My Notes</button></a>
   {% else %}
     <a href="{% url 'homepage' %}"><button>Home</button></a>

@@ -158,8 +158,8 @@ select option {
     position: absolute;
     top: 0;
     right: 0;
-    width: 10px;
-    height: 10px;
+    width: 13px;
+    height: 13px;
     border-radius: 50%;
 }
 
@@ -169,4 +169,14 @@ select option {
 
 .scheduled-time-indicator:not(.finished) {
     background-color: red;
+}
+
+.homepage_buttons {
+    margin: 50px;
+    font-size: 50px;
+    background-color: #4FC3F7;
+    padding: 20px;
+    cursor: pointer;
+    color: white;
+
 }

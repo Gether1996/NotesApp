@@ -7,6 +7,18 @@
     <link rel="stylesheet" href="{% static 'styling.css' %}">
     {% if request.user.is_authenticated %}
         <h1>Welcome {{ request.user.username }}!</h1>
+        {% if first_note %}
+        <h2>Most urgent note:</h2>
+    <div class="note">
+        <div class="note-content">
+            <h2>{{ first_note.category.name }}</h2>
+            <h1>{{ first_note.name }}</h1>
+            <p>{{ first_note.description }}</p>
+            <p>Time remaining: {{ remaining_time_formatted }}</p>
+        </div>
+
+    </div>
+        {% endif %}
     {% else %}
         <h1>Welcome to Notepad app!</h1>
         <h2>In this app, you can add notes with various filters.</h2>
