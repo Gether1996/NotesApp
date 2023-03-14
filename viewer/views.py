@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timezone
 from viewer.forms import CategoryForm, NoteForm
 from viewer.models import *
 
@@ -21,7 +21,7 @@ def homepage(request):
         if days > 0:
             remaining_time_formatted = f"{days}d:{hours:02d}h:{minutes:02d}m:{seconds:02d}s"
         else:
-            remaining_time_formatted = f"{hours:02d}h:{minutes:02d}m:{seconds:02d}s"
+            remaining_time_formatted = f"{hours:02d}:{minutes:02d}:{seconds:02d}"
     else:
         remaining_time_formatted = ''
     return render(request, 'homepage.html', {"first_note": first_note, "remaining_time_formatted": remaining_time_formatted})
