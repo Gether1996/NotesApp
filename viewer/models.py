@@ -10,9 +10,15 @@ class Category(Model):
 
 
 class Note(Model):
-    COLD = 'Cold'
-    MODERATE = 'Moderate'
-    WARM = 'Warm'
+    PRIORITY_CHOICES = [
+        (1, "Low"),
+        (2, "Mid"),
+        (3, "High"),
+        (4, "Top")
+    ]
+    COLD = 'Cold (below 0°C)'
+    MODERATE = 'Moderate (0-15°C)'
+    WARM = 'Warm (16°C +)'
     WEATHER_CHOICES = [
         (COLD, 'Cold (below 0°C)'),
         (MODERATE, 'Moderate (0-15°C)'),
@@ -21,6 +27,7 @@ class Note(Model):
     user = ForeignKey(User, on_delete=CASCADE)
     category = ForeignKey(Category, on_delete=CASCADE)
     name = CharField(max_length=100)
+    priority = IntegerField(choices=PRIORITY_CHOICES, default="Low")
     created_at = DateTimeField(auto_now_add=True)
     scheduled_time = DateTimeField(blank=True, null=True)
     description = TextField()

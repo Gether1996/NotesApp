@@ -8,10 +8,14 @@ from viewer.models import *
 def homepage(request):
     user_id = request.user.id
     now_utc = datetime.now(timezone.utc)
-    notes_ordered = Note.objects.filter(user_id=user_id, scheduled_time__gte=now_utc).order_by('scheduled_time')
-    first_note = notes_ordered.first()
-    if first_note is not None:
-        remaining_time = (first_note.scheduled_time - now_utc).total_seconds()
+    notes_ordered_by_time = Note.objects.filter(user_id=user_id, scheduled_time__gte=now_utc, finished=False).order_by('scheduled_time')
+    first_note_by_time = notes_ordered_by_time.first()
+    try:
+        note_with_priority_4 = Note.objects.get(user_id=user_id, finished=False, priority=4)
+    except Note.DoesNotExist:
+        note_with_priority_4 = None
+    if first_note_by_time is not None:
+        remaining_time = (first_note_by_time.scheduled_time - now_utc).total_seconds()
         days = int(remaining_time // (24 * 3600))
         seconds = int(remaining_time % (24 * 3600))
         hours = seconds // 3600
@@ -24,7 +28,8 @@ def homepage(request):
             remaining_time_formatted = f"{hours:02d}:{minutes:02d}:{seconds:02d}"
     else:
         remaining_time_formatted = ''
-    return render(request, 'homepage.html', {"first_note": first_note, "remaining_time_formatted": remaining_time_formatted})
+    return render(request, 'homepage.html', {"first_note_by_time": first_note_by_time, "remaining_time_formatted": remaining_time_formatted,
+                                             "note_with_priority_4": note_with_priority_4})
 
 
 @login_required
@@ -70,7 +75,7 @@ def edit_note(request, note_id):
         form = NoteForm(request.POST, request.FILES, instance=note)
         if form.is_valid():
             form.save()
-            return redirect('homepage')
+            return redirect('user_notes')
     else:
         form = NoteForm(instance=note)
     context = {

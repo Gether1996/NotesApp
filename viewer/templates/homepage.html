@@ -4,26 +4,66 @@
 {% block content %}
 {% load static %}
 <body>
-    <link rel="stylesheet" href="{% static 'styling.css' %}">
-    {% if request.user.is_authenticated %}
-        <h1>Welcome {{ request.user.username }}!</h1>
-        {% if first_note %}
-        <h2>Most urgent note:</h2>
-    <div class="note">
-        <div class="note-content">
-            <h2>{{ first_note.category.name }}</h2>
-            <h1>{{ first_note.name }}</h1>
-            <p>{{ first_note.description }}</p>
-            <p>Time remaining: {{ remaining_time_formatted }}</p>
-        </div>
+<link rel="stylesheet" href="{% static 'styling.css' %}">
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+{% if request.user.is_authenticated %}
+    <h1>Welcome {{ request.user.username }}!</h1>
+    {% if first_note_by_time %}
+    <h2>Least time remaining:</h2>
+        <div class="note">
+            <div class="note-content">
+                <h2>{{ first_note_by_time.category.name }}</h2>
+                <h1>{{ first_note_by_time.name }}</h1>
+                <p>{{ first_note_by_time.description }}</p>
+                <p>Time remaining: {{ remaining_time_formatted }}</p>
+                <div class="scheduled-time-indicator {% if first_note_by_time.finished %}finished{% endif %}"></div>
 
-    </div>
-        {% endif %}
-    {% else %}
-        <h1>Welcome to Notepad app!</h1>
-        <h2>In this app, you can add notes with various filters.</h2>
-        <h2>To begin, you need to be logged into our site.</h2>
+            </div>
+            <div class="note-actions">
+                <a href="http://127.0.0.1:8000/notes/{{ first_note_by_time.id }}/edit/"><button class="edit-note"><i class="fa fa-pencil"></i></button></a>
+                    <form style="display: inline-block;" method="post" action="{% url 'delete_note' first_note_by_time.id %}" onsubmit="return confirm('Are you sure you want to delete this note?')">
+                      {% csrf_token %}
+                      <button class="delete-note"><i class="fa fa-times"></i></button>
+                    </form>
+                    <form style="display: inline-block;" method="post" action="{% url 'finish_note' first_note_by_time.id %}" onsubmit="return confirm('Is it really finished?')">
+                      {% csrf_token %}
+                      <button class="finish-note"><i class='fa fa-check-square'></i></button>
+                    </form>
+            </div>
+        </div>
     {% endif %}
+
+    {% if note_with_priority_4 %}
+    <h2>Highest priority (not finished):</h2>
+        <div class="note">
+            <div class="note-content">
+                <h2>{{ note_with_priority_4.category.name }}</h2>
+                <h1>{{ note_with_priority_4.name }}</h1>
+                <p>{{ note_with_priority_4.description }}</p>
+                {% if note_with_priority_4.scheduled_time %}
+                <p>Deadline: {{ note_with_priority_4.scheduled_time }}</p>
+                {% endif %}
+                <div class="scheduled-time-indicator {% if note_with_priority_4.finished %}finished{% endif %}"></div>
+
+            </div>
+            <div class="note-actions">
+                <a href="http://127.0.0.1:8000/notes/{{ note_with_priority_4.id }}/edit/"><button class="edit-note"><i class="fa fa-pencil"></i></button></a>
+                    <form style="display: inline-block;" method="post" action="{% url 'delete_note' note_with_priority_4.id %}" onsubmit="return confirm('Are you sure you want to delete this note?')">
+                      {% csrf_token %}
+                      <button class="delete-note"><i class="fa fa-times"></i></button>
+                    </form>
+                    <form style="display: inline-block;" method="post" action="{% url 'finish_note' note_with_priority_4.id %}" onsubmit="return confirm('Is it really finished?')">
+                      {% csrf_token %}
+                      <button class="finish-note"><i class='fa fa-check-square'></i></button>
+                    </form>
+            </div>
+        </div>
+    {% endif %}
+{% else %}
+    <h1>Welcome to Notepad app!</h1>
+    <h2>In this app, you can add notes with various filters.</h2>
+    <h2>To begin, you need to be logged into our site.</h2>
+{% endif %}
 
 
 
