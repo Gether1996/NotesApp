@@ -100,4 +100,10 @@ def finish_note(request, note_id):
         return redirect('user_notes')
 
 
+def note_detail(request, note_id):
+    note = get_object_or_404(Note, pk=note_id)
+    context = {
+        'note': note
+    }
+    return render(request, 'note_detail.html', context)
 

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'styling.css' %}">
+  <h1>{{ note.name }}</h1>
+    <div class="note-detail">
+      <p>Category: {{ note.category.name }} €</p>
+      <p>Description: {{ note.description }}</p>
+      {% if note.scheduled_time %}
+      <p>Scheduled time: {{ note.scheduled_time }}</p>
+      {% endif %}
+      <p>  {{ note.finished }}</p>
+    </div>
+
+{% endblock %}
+
