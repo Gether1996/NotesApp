@@ -27,13 +27,13 @@
             </div>
             <div class="note-actions">
                 <a href="http://127.0.0.1:8000/notes/{{ first_note_by_time.id }}/edit/"><button class="edit-note"><i class="fa fa-pencil"></i></button></a>
-                    <form style="display: inline-block;" method="post" action="{% url 'delete_note' first_note_by_time.id %}" onsubmit="return confirm('Are you sure you want to delete this note?')">
-                      {% csrf_token %}
-                      <button class="delete-note"><i class="fa fa-times"></i></button>
-                    </form>
                     <form style="display: inline-block;" method="post" action="{% url 'finish_note' first_note_by_time.id %}" onsubmit="return confirm('Is it really finished?')">
                       {% csrf_token %}
                       <button class="finish-note"><i class='fa fa-check'></i></button>
+                    </form>
+                    <form style="display: inline-block;" method="post" action="{% url 'delete_note' first_note_by_time.id %}" onsubmit="return confirm('Are you sure you want to delete this note?')">
+                      {% csrf_token %}
+                      <button class="delete-note"><i class="fa fa-times"></i></button>
                     </form>
                 <a href="http://127.0.0.1:8000/note_detail/{{ first_note_by_time.id }}"><button class="note-details"><i class='fa fa-info'></i></button></a>
             </div>
@@ -57,13 +57,13 @@
             </div>
             <div class="note-actions">
                 <a href="http://127.0.0.1:8000/notes/{{ note_with_priority_4.id }}/edit/"><button class="edit-note"><i class="fa fa-pencil"></i></button></a>
-                    <form style="display: inline-block;" method="post" action="{% url 'delete_note' note_with_priority_4.id %}" onsubmit="return confirm('Are you sure you want to delete this note?')">
-                      {% csrf_token %}
-                      <button class="delete-note"><i class="fa fa-times"></i></button>
-                    </form>
                     <form style="display: inline-block;" method="post" action="{% url 'finish_note' note_with_priority_4.id %}" onsubmit="return confirm('Is it really finished?')">
                       {% csrf_token %}
                       <button class="finish-note"><i class='fa fa-check'></i></button>
+                    </form>
+                    <form style="display: inline-block;" method="post" action="{% url 'delete_note' note_with_priority_4.id %}" onsubmit="return confirm('Are you sure you want to delete this note?')">
+                      {% csrf_token %}
+                      <button class="delete-note"><i class="fa fa-times"></i></button>
                     </form>
                 <a href="http://127.0.0.1:8000/note_detail/{{ note_with_priority_4.id }}"><button class="note-details"><i class='fa fa-info'></i></button></a>
             </div>

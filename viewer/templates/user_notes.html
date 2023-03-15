@@ -38,16 +38,16 @@
         </div>
         <div class="note-actions">
             <a href="http://127.0.0.1:8000/notes/{{ note.id }}/edit/"><button class="edit-note"><i class="fa fa-pencil"></i></button></a>
-                <form style="display: inline-block;" method="post" action="{% url 'delete_note' note.id %}" onsubmit="return confirm('Are you sure you want to delete this note?')">
-                  {% csrf_token %}
-                  <button class="delete-note"><i class="fa fa-times"></i></button>
-                </form>
                 {% if note.finished == False %}
                 <form style="display: inline-block;" method="post" action="{% url 'finish_note' note.id %}" onsubmit="return confirm('Is it really finished?')">
                   {% csrf_token %}
                   <button class="finish-note"><i class='fa fa-check'></i></button>
                 </form>
                 {% endif %}
+                <form style="display: inline-block;" method="post" action="{% url 'delete_note' note.id %}" onsubmit="return confirm('Are you sure you want to delete this note?')">
+                  {% csrf_token %}
+                  <button class="delete-note"><i class="fa fa-times"></i></button>
+                </form>
             <a href="http://127.0.0.1:8000/note_detail/{{ note.id }}"><button class="note-details"><i class='fa fa-info'></i></button></a>
         </div>
     </div>
