@@ -1,10 +1,18 @@
-h1, h2 {
+h1, h2{
     margin-left: 26px;
+}
+h3 {
+    font-size: 25px;
+    margin: 10px 5px 5px 0px;
+}
+
+h3, h4 {
+    text-align: center;
 }
 
 body {
     margin: 0;
-    background-image: url('background/background.png' );
+    background-image: url('background/background1.jpg' );
     background-size: cover;
 }
 
@@ -13,7 +21,7 @@ nav {
   justify-content: space-between;
   align-items: center;
   height: 60px;
-  background-color: #4FC3F7;
+  background-color: #c5eba6;
   padding: 0 20px;
   margin: 0;
 }
@@ -23,8 +31,7 @@ select option {
 }
 
 .navbar-left button {
-    background-color: #4FC3F7;
-    color: #fff;
+    background-color: #c5eba6;
     border: none;
     padding: 10px 20px;
     font-size: 22px;
@@ -35,12 +42,11 @@ select option {
 }
 
 .navbar-left button:hover {
-    background-color: #2196F3;
+    background-color: #9ed175;
 }
 
 .navbar-right select {
-    background-color: #4FC3F7;
-    color: #fff;
+    background-color: #c5eba6;
     border: none;
     padding: 10px 10px;
     font-size: 22px;
@@ -51,18 +57,17 @@ select option {
 }
 
 .navbar-right option {
-  background-color: #4FC3F7;
-  color: white;
+  background-color: #c5eba6;
   cursor: pointer;
 }
 
 .navbar-right select:hover {
-  background-color: #2196F3;
+  background-color: #9ed175;
   transition: background-color 0.3s ease;
 }
 
 .navbar-right option:hover {
-  background-color: #2196F3;
+  background-color: #9ed175;
   transition: background-color 0.3s ease;
 }
 
@@ -72,9 +77,8 @@ select option {
 
 .sign_up_btn {
   margin-top: 20px;
-  background-color: #4FC3F7;
+  background-color: #c5eba6;
   border: none;
-  color: white;
   padding: 10px 20px;
   text-align: center;
   text-decoration: none;
@@ -85,59 +89,69 @@ select option {
 }
 
 .sign_up_btn:hover {
-  background-color: #2196F3;
+  background-color: #9ed175;
 }
 
 .note {
-  background-color: #f9f9f9;
-  border: 2px solid #ddd;
+  background-image: url('background/sticker.jpg' );
+  background-size: cover;
   box-shadow: 3px 3px 8px rgba(0, 0, 0, 2);
-  padding: 20px;
-  margin-bottom: 20px;
-  margin-left: 20px;
-  width: 300px;
+  padding: 10px 20px 20px 20px;
+  vertical-align: top;
+  display: inline-block;
+  text-align: left;
+  width: 280px;
+  height: 300px;
+  margin: 0px 25px 25px 25px;
+  overflow: hidden;
+}
+
+
+.note-high-priority {
+  background-image: url('background/priority-sticker.jpg' );
+  background-size: cover;
+  box-shadow: 3px 3px 8px rgba(0, 0, 0, 2);
+  padding: 10px 20px 20px 20px;
+  vertical-align: top;
+  display: inline-block;
+  text-align: left;
+  width: 280px;
+  height: 300px;
+  margin: 0px 25px 25px 25px;
+  overflow: hidden;
 }
 
 .note-content {
+  margin-top: 50px;
   position: relative;
-}
-
-.note-actions button {
-  display: inline-block;
-  width: 40px;
-  height: 40px;
-  margin-right: 10px;
-  border: none;
-
-}
-
-.edit-note {
-  background-color: #4FC3F7;
-  font-size: 30px;
-}
-
-
-.delete-note {
-  background-color: #e15d5d;
-  font-size: 30px;
-}
-
-.finish-note {
-  background-color: #45b93b;
-  font-size: 30px;
+  overflow: auto;
+  height: calc(100% - 100px);
 }
 
 .btn-add {
     margin: 30px;
     cursor: pointer;
-    background-color: #4FC3F7;
-    border: 1px;
+    background-color: #c5eba6;
+    border: 2px solid black;
     font-size: 26px;
-    color: white;
+    font-weight: bold;
+}
+
+.note-actions button {
+  position: relative;
+  bottom: 0;
+  display: inline-block;
+  width: 45px;
+  height: 45px;
+  margin: 10px;
+  border: none;
+  border-radius: 50%;
+  background-color: #4598bd00;
+  font-size: 30px;
 }
 
 .edit-note:hover {
-  background-color: #2196F3;
+  background-color: #9ed175;
   transition: background-color 0.3s ease;
   cursor: pointer;
 }
@@ -149,7 +163,13 @@ select option {
 }
 
 .finish-note:hover {
-  background-color: #22661c;
+  background-color: #9ed175;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.note-details:hover {
+  background-color: #9ed175;
   transition: background-color 0.3s ease;
   cursor: pointer;
 }

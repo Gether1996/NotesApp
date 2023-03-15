@@ -8,12 +8,18 @@
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 {% if request.user.is_authenticated %}
     <h1>Welcome {{ request.user.username }}!</h1>
+    {% if first_note_by_time or note_with_priority_4 %}
+    <h2>Your unfinished notes</h2>
+    {% else %}
+    <h2>There is nothing to worry about, all your time-scheduled and top-priority notes are done.</h2>
+    {% endif %}
+    <div style="display: inline-block;">
     {% if first_note_by_time %}
     <h2>Least time remaining:</h2>
         <div class="note">
             <div class="note-content">
-                <h2>{{ first_note_by_time.category.name }}</h2>
-                <h1>{{ first_note_by_time.name }}</h1>
+                <h3>{{ first_note_by_time.name }}</h3>
+                <h4>{{ first_note_by_time.category.name }}</h4>
                 <p>{{ first_note_by_time.description }}</p>
                 <p>Time remaining: {{ remaining_time_formatted }}</p>
                 <div class="scheduled-time-indicator {% if first_note_by_time.finished %}finished{% endif %}"></div>
@@ -27,18 +33,21 @@
                     </form>
                     <form style="display: inline-block;" method="post" action="{% url 'finish_note' first_note_by_time.id %}" onsubmit="return confirm('Is it really finished?')">
                       {% csrf_token %}
-                      <button class="finish-note"><i class='fa fa-check-square'></i></button>
+                      <button class="finish-note"><i class='fa fa-check'></i></button>
                     </form>
+                <a href=""><button class="note-details"><i class='fa fa-info'></i></button></a>
             </div>
         </div>
+    </div>
     {% endif %}
 
+    <div style="display: inline-block;">
     {% if note_with_priority_4 %}
-    <h2>Highest priority (not finished):</h2>
-        <div class="note">
+    <h2>Highest priority:</h2>
+        <div class="note-high-priority">
             <div class="note-content">
-                <h2>{{ note_with_priority_4.category.name }}</h2>
-                <h1>{{ note_with_priority_4.name }}</h1>
+                <h3>{{ note_with_priority_4.name }}</h3>
+                <h4>{{ note_with_priority_4.category.name }}</h4>
                 <p>{{ note_with_priority_4.description }}</p>
                 {% if note_with_priority_4.scheduled_time %}
                 <p>Deadline: {{ note_with_priority_4.scheduled_time }}</p>
@@ -54,10 +63,12 @@
                     </form>
                     <form style="display: inline-block;" method="post" action="{% url 'finish_note' note_with_priority_4.id %}" onsubmit="return confirm('Is it really finished?')">
                       {% csrf_token %}
-                      <button class="finish-note"><i class='fa fa-check-square'></i></button>
+                      <button class="finish-note"><i class='fa fa-check'></i></button>
                     </form>
+                <a href=""><button class="note-details"><i class='fa fa-info'></i></button></a>
             </div>
         </div>
+    </div>
     {% endif %}
 {% else %}
     <h1>Welcome to Notepad app!</h1>

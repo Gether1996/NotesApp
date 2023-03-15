@@ -34,7 +34,7 @@ def homepage(request):
 
 @login_required
 def user_notes(request):
-    notes = Note.objects.filter(user=request.user)
+    notes = Note.objects.filter(user=request.user).order_by('-priority')
     return render(request, 'user_notes.html', {'notes': notes})
 
 

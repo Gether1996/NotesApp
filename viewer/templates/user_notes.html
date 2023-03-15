@@ -12,22 +12,25 @@
 </head>
 <body>
 
-    <h1>All my notes</h1>
-<div style="display: inline-block;">
-  <button class="btn-add"><a href="http://127.0.0.1:8000/add_category/" style="text-decoration: none; color: white;">Add category</a></button>
+<div style="display: flex; align-items: center; justify-content: flex-start;">
+  <h1 style="margin-right: 20px;">All my notes (priority ordering)</h1>
+  <div style="display: inline-block; margin-right: 20px;">
+    <button class="btn-add"><a href="http://127.0.0.1:8000/add_category/" style="text-decoration: none; color: black;">Add category</a></button>
+  </div>
+  <div style="display: inline-block;">
+    <button class="btn-add" style="font-size: 40px; margin-right: 20px;"><a href="http://127.0.0.1:8000/add_note/" style="color: black;"><i class='fa fa-pencil-square-o'></i></a></button>
+  </div>
 </div>
-<div style="display: inline-block;">
-  <button class="btn-add" style="font-size: 40px;"><a href="http://127.0.0.1:8000/add_note/" style="color: black;"><i class='fa fa-pencil-square-o'></i></a></button>
-</div>
+
 {% for note in notes %}
-    <div class="note">
+    <div class="note{% if note.priority == 4 %}-high-priority{% endif %}">
         <div class="note-content">
-            <h2>{{ note.category.name }}</h2>
-            <h1>{{ note.name }}</h1>
+            <h3>{{ note.name }}</h3>
+            <h4>{{ note.category.name }}</h4>
             <p>{{ note.description }}</p>
             {% if note.scheduled_time %}
                 {% if note.finished == False %}
-                <p>Deadline: {{ note.scheduled_time }}</p>
+                <p style="position: relative; bottom: 0px;">Deadline: {{ note.scheduled_time }}</p>
                 {% endif %}
             {% endif %}
                 <div class="scheduled-time-indicator {% if note.finished %}finished{% endif %}"></div>
@@ -42,9 +45,10 @@
                 {% if note.finished == False %}
                 <form style="display: inline-block;" method="post" action="{% url 'finish_note' note.id %}" onsubmit="return confirm('Is it really finished?')">
                   {% csrf_token %}
-                  <button class="finish-note"><i class='fa fa-check-square'></i></button>
+                  <button class="finish-note"><i class='fa fa-check'></i></button>
                 </form>
                 {% endif %}
+            <a href=""><button class="note-details"><i class='fa fa-info'></i></button></a>
         </div>
     </div>
 {% endfor %}
