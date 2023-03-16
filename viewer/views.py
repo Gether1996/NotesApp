@@ -3,11 +3,24 @@ from django.shortcuts import render, redirect, get_object_or_404
 from datetime import datetime, timezone
 from viewer.forms import CategoryForm, NoteForm
 from viewer.models import *
+import requests
 
 
-def base_context():
+def base_context(request):
     all_categories = Category.objects.all()
-    return {'all_categories': all_categories}
+    if request.user.is_authenticated:
+        user = request.user.customuser
+        city = user.city
+        weather_data = get_current_weather(city)
+        if weather_data is not None:
+            temperature = weather_data
+            return {
+                'user': user,
+                'temperature': temperature,
+                'all_categories': all_categories,
+            }
+    else:
+        return {'all_categories': all_categories}
 
 
 def homepage(request):
@@ -15,10 +28,7 @@ def homepage(request):
     now_utc = datetime.now(timezone.utc)
     notes_ordered_by_time = Note.objects.filter(user_id=user_id, scheduled_time__gte=now_utc, finished=False).order_by('scheduled_time')
     first_note_by_time = notes_ordered_by_time.first()
-    try:
-        note_with_priority_4 = Note.objects.get(user_id=user_id, finished=False, priority=4)
-    except Note.DoesNotExist:
-        note_with_priority_4 = None
+    notes_with_priority_4 = Note.objects.filter(user_id=user_id, finished=False, priority=4)
     if first_note_by_time is not None:
         remaining_time = (first_note_by_time.scheduled_time - now_utc).total_seconds()
         days = int(remaining_time // (24 * 3600))
@@ -36,9 +46,9 @@ def homepage(request):
     context = {
         "first_note_by_time": first_note_by_time,
         "remaining_time_formatted": remaining_time_formatted,
-        "note_with_priority_4": note_with_priority_4
+        "notes_with_priority_4": notes_with_priority_4
     }
-    context.update(base_context())
+    context.update(base_context(request))
     return render(request, 'homepage.html', context)
 
 
@@ -48,7 +58,7 @@ def user_notes(request):
     context = {
         'notes': notes
     }
-    context.update(base_context())
+    context.update(base_context(request))
     return render(request, 'user_notes.html', context)
 
 
@@ -63,7 +73,7 @@ def add_category(request):
     context = {
         'form': form
     }
-    context.update(base_context())
+    context.update(base_context(request))
     return render(request, 'add_category.html', context)
 
 
@@ -81,7 +91,7 @@ def add_note(request):
     context = {
         'form': form
     }
-    context.update(base_context())
+    context.update(base_context(request))
     return render(request, 'add_note.html', context)
 
 
@@ -98,7 +108,7 @@ def edit_note(request, note_id):
         'form': form,
         'note_id': note_id
     }
-    context.update(base_context())
+    context.update(base_context(request))
     return render(request, 'edit_note.html', context)
 
 
@@ -122,7 +132,7 @@ def note_detail(request, note_id):
     context = {
         'note': note
     }
-    context.update(base_context())
+    context.update(base_context(request))
     return render(request, 'note_detail.html', context)
 
 
@@ -144,6 +154,16 @@ def filter_notes(request):
     context = {
         'notes': notes
     }
-    context.update(base_context())
+    context.update(base_context(request))
     return render(request, 'filter_notes.html', context)
+
+
+def get_current_weather(city):
+    url = f'http://api.openweathermap.org/data/2.5/weather?q={city}&appid=6bcbc258ca1449deb93c6851e10afeff'
+    response = requests.get(url)
+    response.raise_for_status()
+    data = response.json()
+    temperature = round(data['main']['temp'] - 273.15, 1)
+    return temperature
+
 
