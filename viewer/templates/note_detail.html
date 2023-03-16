@@ -3,14 +3,31 @@
 {% block content %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'styling.css' %}">
-  <h1>{{ note.name }}</h1>
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+  {% if note.finished == True %}  <h1>{{ note.name }} (done)</h1> {% else %}  <h1>{{ note.name }} (not finished yet)</h1> {% endif %}
     <div class="note-detail">
-      <p>Category: {{ note.category.name }} €</p>
-      <p>Description: {{ note.description }}</p>
+      <h2> {{ note.category.name }}</h2>
+      <p style="font-size: 25px; margin: 25px; margin-bottom: 70px;"> {{ note.description }}</p>
       {% if note.scheduled_time %}
-      <p>Scheduled time: {{ note.scheduled_time }}</p>
+      <p style="font-size: 25px; margin: 25px;"><b style="font-weight: bold;">Scheduled time:</b> {{ note.scheduled_time }}</p>
       {% endif %}
-      <p>  {{ note.finished }}</p>
+      {% if note.preferred_weather == 'Cold (below 0°C)' %}<p style="font-size: 25px; margin: 25px; color: blue;"><b style="font-weight: bold;">Preferred weather:  </b><i class="fa fa-empire"> - 0°C</i></p>{% endif %}
+      {% if note.preferred_weather == 'Moderate (0-15°C)' %} <p style="font-size: 25px; margin: 25px; color: orange;"><b style="font-weight: bold;">Preferred weather:  </b><i class="fa fa-cloud"> 0 - 15°C</i></p> {% endif %}
+      {% if note.preferred_weather == 'Warm (16°C +)' %} <p style="font-size: 25px; margin: 25px; color: red;"><b style="font-weight: bold;">Preferred weather:  </b><i class="fa fa-sun-o"> 15°C +</i></p> {% endif %}
+    </div>
+    <div class="note-actions" style="margin: 30px;">
+      <a href="http://127.0.0.1:8000/notes/{{ note.id }}/edit/"><button class="edit-note"><i class="fa fa-pencil"></i></button></a>
+          {% if note.finished == False %}
+          <form style="display: inline-block;" method="post" action="{% url 'finish_note' note.id %}" onsubmit="return confirm('Is it really finished?')">
+            {% csrf_token %}
+            <button class="finish-note"><i class='fa fa-check'></i></button>
+          </form>
+          {% endif %}
+          <form style="display: inline-block;" method="post" action="{% url 'delete_note' note.id %}" onsubmit="return confirm('Are you sure you want to delete this note?')">
+            {% csrf_token %}
+            <button class="delete-note"><i class="fa fa-times"></i></button>
+          </form>
+      <a href="http://127.0.0.1:8000/note_detail/{{ note.id }}"><button class="note-details"><i class='fa fa-info'></i></button></a>
     </div>
 
 {% endblock %}
