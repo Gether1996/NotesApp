@@ -137,6 +137,11 @@ select option {
     font-weight: bold;
 }
 
+.btn-add:hover {
+  background-color: #9ed175;
+  transition: background-color 0.3s ease;
+}
+
 .note-actions button {
   position: relative;
   bottom: 0;
@@ -172,23 +177,6 @@ select option {
   background-color: white;
   transition: background-color 0.3s ease;
   cursor: pointer;
-}
-
-.scheduled-time-indicator {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 13px;
-    height: 13px;
-    border-radius: 50%;
-}
-
-.scheduled-time-indicator.finished {
-    background-color: green;
-}
-
-.scheduled-time-indicator:not(.finished) {
-    background-color: red;
 }
 
 .homepage_buttons {

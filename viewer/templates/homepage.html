@@ -22,8 +22,6 @@
                 <h4>{{ first_note_by_time.category.name }}</h4>
                 <p>{{ first_note_by_time.description }}</p>
                 <p>Time remaining: {{ remaining_time_formatted }}</p>
-                <div class="scheduled-time-indicator {% if first_note_by_time.finished %}finished{% endif %}"></div>
-
             </div>
             <div class="note-actions">
                 <a href="http://127.0.0.1:8000/notes/{{ first_note_by_time.id }}/edit/"><button class="edit-note"><i class="fa fa-pencil"></i></button></a>
@@ -52,7 +50,6 @@
                 {% if note_with_priority_4.scheduled_time %}
                 <p>Deadline: {{ note_with_priority_4.scheduled_time }}</p>
                 {% endif %}
-                <div class="scheduled-time-indicator {% if note_with_priority_4.finished %}finished{% endif %}"></div>
 
             </div>
             <div class="note-actions">

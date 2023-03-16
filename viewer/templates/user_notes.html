@@ -25,7 +25,11 @@
 {% for note in notes %}
     <div class="note{% if note.priority == 4 %}-high-priority{% endif %}">
         <div class="note-content">
+            {% if note.finished == True %}
+            <h3>{{ note.name }} <i class="fa fa-check"></i></h3>
+            {% else %}
             <h3>{{ note.name }}</h3>
+            {% endif %}
             <h4>{{ note.category.name }}</h4>
             <p>{{ note.description }}</p>
             {% if note.scheduled_time %}
@@ -33,7 +37,6 @@
                 <p style="position: relative; bottom: 0px;">Deadline: {{ note.scheduled_time }}</p>
                 {% endif %}
             {% endif %}
-                <div class="scheduled-time-indicator {% if note.finished %}finished{% endif %}"></div>
 
         </div>
         <div class="note-actions">
