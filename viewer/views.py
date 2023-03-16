@@ -127,7 +127,7 @@ def note_detail(request, note_id):
 
 
 def filter_notes(request):
-    notes = Note.objects.all()
+    notes = Note.objects.filter(user=request.user)
     category_name = request.GET.get('category')
     priority = request.GET.get('priority')
     finished = request.GET.get('finished')
