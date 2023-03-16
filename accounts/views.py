@@ -20,8 +20,3 @@ def registration(request):
 def logout_view(request):
     logout(request)
     return redirect('homepage')
-
-
-def profile(request):
-    return render(request, "profile.html")
-

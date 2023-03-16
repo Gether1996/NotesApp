@@ -9,26 +9,36 @@
 <nav>
   <div class="navbar-left">
   {% if request.user.is_authenticated %}
-    <a href="{% url 'homepage' %}"><button>Home</button></a>
-    <a href="{% url 'user_notes' %}"><button>My Notes</button></a>
+    <a href="{% url 'homepage' %}" style="display: inline-block;"><button>Home</button></a>
+    <div class="dropdown">
+        <button class="dropdown-btn">My Notes</button>
+        <div class="dropdown-content">
+          <a href="{% url 'user_notes' %}">All notes</a>
+          <a href="#">Top-High</a>
+          <a href="#">Mid-Low</a>
+          <a href="#">Ongoing</a>
+          <a href="#">Finished</a>
+        </div>
+      </div>
+
   {% else %}
     <a href="{% url 'homepage' %}"><button>Home</button></a>
   {% endif %}
   </div>
-  <div class="navbar-right">
-    <select onchange="location = this.value;">
-      <option hidden disabled selected>User</option>
-    {% if perms.viewer %}
-      <option value="http://127.0.0.1:8000/admin">Admin</option>
-    {% endif %}
-    {% if request.user.is_authenticated %}
-      <option value="http://127.0.0.1:8000/accounts/profile/">Profile</option>
-      <option value="{% url 'logout' %}">Logout</option>
-    {% else %}
-      <option value="{% url 'login' %}">Login</option>
-      <option value="{% url 'registration' %}">Register</option>
-    {% endif %}
-    </select>
+  <div class="dropdown">
+      <button class="dropdown-btn">User</button>
+        <div class="dropdown-content">
+        {% if perms.viewer %}
+          <a href="http://127.0.0.1:8000/admin">Admin</a>
+        {% endif %}
+        {% if request.user.is_authenticated %}
+          <a href="http://127.0.0.1:8000/accounts/profile/">Profile</a>
+          <a href="{% url 'logout' %}">Logout</a>
+        {% else %}
+          <a href="{% url 'login' %}">Login</a>
+          <a href="{% url 'registration' %}">Register</a>
+        {% endif %}
+        </div>
   </div>
 </nav>
 
