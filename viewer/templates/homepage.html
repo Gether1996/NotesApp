@@ -16,7 +16,10 @@
     <div style="display: inline-block;">
     {% if first_note_by_time %}
     <h2>Least time remaining:</h2>
-        <div class="note">
+      <div class="note
+        {% if note.priority == 4 %}note-top-priority{% endif %}
+        {% if note.priority == 3 %}note-high-priority{% endif %}
+        {% if note.priority == 2 %}note-mid-priority{% endif %}">
             <div class="note-content">
                 <h3>{{ first_note_by_time.name }}</h3>
                 <h4>{{ first_note_by_time.category.name }}</h4>
@@ -42,7 +45,7 @@
     <div style="display: inline-block;">
     {% if note_with_priority_4 %}
     <h2>Highest priority:</h2>
-        <div class="note-high-priority">
+        <div class="note-top-priority">
             <div class="note-content">
                 <h3>{{ note_with_priority_4.name }}</h3>
                 <h4>{{ note_with_priority_4.category.name }}</h4>

@@ -157,8 +157,36 @@ nav {
 }
 
 
-.note-high-priority {
+.note-top-priority {
   background-image: url('background/priority-sticker.jpg' );
+  background-size: cover;
+  box-shadow: 3px 3px 8px rgba(0, 0, 0, 2);
+  padding: 10px 20px 20px 20px;
+  vertical-align: top;
+  display: inline-block;
+  text-align: left;
+  width: 280px;
+  height: 300px;
+  margin: 0px 25px 25px 25px;
+  overflow: hidden;
+}
+
+.note-high-priority {
+  background-image: url('background/high-priority-sticker.jpeg' );
+  background-size: cover;
+  box-shadow: 3px 3px 8px rgba(0, 0, 0, 2);
+  padding: 10px 20px 20px 20px;
+  vertical-align: top;
+  display: inline-block;
+  text-align: left;
+  width: 280px;
+  height: 300px;
+  margin: 0px 25px 25px 25px;
+  overflow: hidden;
+}
+
+.note-mid-priority {
+  background-image: url('background/mid-prior-sticker.png' );
   background-size: cover;
   box-shadow: 3px 3px 8px rgba(0, 0, 0, 2);
   padding: 10px 20px 20px 20px;
@@ -206,26 +234,30 @@ nav {
 }
 
 .edit-note:hover {
-  background-color: #9ed175;
-  transition: background-color 0.3s ease;
+  background-color: transparent;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
+  transition: box-shadow 0.3s ease-in-out;
   cursor: pointer;
 }
 
 .delete-note:hover {
-  background-color: #932314;
-  transition: background-color 0.3s ease;
+  background-color: transparent;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
+  transition: box-shadow 0.3s ease-in-out;
   cursor: pointer;
 }
 
 .finish-note:hover {
-  background-color: #9ed175;
-  transition: background-color 0.3s ease;
+  background-color: transparent;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
+  transition: box-shadow 0.3s ease-in-out;
   cursor: pointer;
 }
 
 .note-details:hover {
-  background-color: white;
-  transition: background-color 0.3s ease;
+  background-color: transparent;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
+  transition: box-shadow 0.3s ease-in-out;
   cursor: pointer;
 }
 

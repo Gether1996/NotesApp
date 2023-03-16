@@ -10,9 +10,11 @@
 </head>
   <h1>Filtered Notes</h1>
 
-  <ul>
     {% for note in notes %}
-      <div class="note{% if note.priority == 4 %}-high-priority{% endif %}">
+      <div class="note
+        {% if note.priority == 4 %}note-top-priority{% endif %}
+        {% if note.priority == 3 %}note-high-priority{% endif %}
+        {% if note.priority == 2 %}note-mid-priority{% endif %}">
         <div class="note-content">
             {% if note.finished == True %}
             <h3>{{ note.name }} <i class="fa fa-check"></i></h3>
@@ -44,7 +46,6 @@
         </div>
     </div>
     {% empty %}
-      <p>No notes found</p>
+      <p style="margin-left: 25px; font-size: 25px;">No notes found</p>
     {% endfor %}
-  </ul>
 {% endblock %}
