@@ -5,6 +5,11 @@ from viewer.forms import CategoryForm, NoteForm
 from viewer.models import *
 
 
+def base_context():
+    all_categories = Category.objects.all()
+    return {'all_categories': all_categories}
+
+
 def homepage(request):
     user_id = request.user.id
     now_utc = datetime.now(timezone.utc)
@@ -28,14 +33,23 @@ def homepage(request):
             remaining_time_formatted = f"{hours:02d}:{minutes:02d}:{seconds:02d}"
     else:
         remaining_time_formatted = ''
-    return render(request, 'homepage.html', {"first_note_by_time": first_note_by_time, "remaining_time_formatted": remaining_time_formatted,
-                                             "note_with_priority_4": note_with_priority_4})
+    context = {
+        "first_note_by_time": first_note_by_time,
+        "remaining_time_formatted": remaining_time_formatted,
+        "note_with_priority_4": note_with_priority_4
+    }
+    context.update(base_context())
+    return render(request, 'homepage.html', context)
 
 
 @login_required
 def user_notes(request):
     notes = Note.objects.filter(user=request.user).order_by('-priority')
-    return render(request, 'user_notes.html', {'notes': notes})
+    context = {
+        'notes': notes
+    }
+    context.update(base_context())
+    return render(request, 'user_notes.html', context)
 
 
 def add_category(request):
@@ -49,6 +63,7 @@ def add_category(request):
     context = {
         'form': form
     }
+    context.update(base_context())
     return render(request, 'add_category.html', context)
 
 
@@ -66,6 +81,7 @@ def add_note(request):
     context = {
         'form': form
     }
+    context.update(base_context())
     return render(request, 'add_note.html', context)
 
 
@@ -82,6 +98,7 @@ def edit_note(request, note_id):
         'form': form,
         'note_id': note_id
     }
+    context.update(base_context())
     return render(request, 'edit_note.html', context)
 
 
@@ -105,5 +122,28 @@ def note_detail(request, note_id):
     context = {
         'note': note
     }
+    context.update(base_context())
     return render(request, 'note_detail.html', context)
+
+
+def filter_notes(request):
+    notes = Note.objects.all()
+    category_name = request.GET.get('category')
+    priority = request.GET.get('priority')
+    finished = request.GET.get('finished')
+
+    if category_name:
+        notes = notes.filter(category__name=category_name)
+
+    if priority:
+        notes = notes.filter(priority=priority)
+
+    if finished is not None:
+        notes = notes.filter(finished=finished)
+
+    context = {
+        'notes': notes
+    }
+    context.update(base_context())
+    return render(request, 'filter_notes.html', context)
 

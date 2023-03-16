@@ -33,4 +33,5 @@ urlpatterns = [
     path('notes/<int:note_id>/delete/', delete_note, name='delete_note'),
     path('notes/<int:note_id>/finish/', finish_note, name='finish_note'),
     path('note_detail/<int:note_id>/', note_detail, name='note_detail'),
+    path('filter/', filter_notes, name='filter_notes'),
 ]

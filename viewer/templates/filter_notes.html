@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Filtered Notes</h1>
+
+  <ul>
+    {% for note in notes %}
+      <li>{{ note.name }} - {{ note.category.name }} - {{ note.status }} - {{ note.priority }}</li>
+    {% empty %}
+      <p>No notes found</p>
+    {% endfor %}
+  </ul>
+{% endblock %}
