@@ -220,6 +220,7 @@ nav {
   transition: background-color 0.3s ease;
 }
 
+
 .note-actions button {
   position: relative;
   bottom: 0;
@@ -232,6 +233,8 @@ nav {
   background-color: #4598bd00;
   font-size: 30px;
 }
+
+
 
 .edit-note:hover {
   background-color: transparent;

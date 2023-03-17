@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Navigation Bar</title>
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 </head>
 <body>
 
@@ -10,7 +11,7 @@
   <div class="navbar-left">
   {% if request.user.is_authenticated %}
     <a href="{% url 'homepage' %}" style="display: inline-block;"><button>Home</button></a>
-      <div class="dropdown">
+      <div class="dropdown" >
         <div class="my-notes">
           <button class="dropdown-btn">My Notes</button>
           <div class="dropdown-content">
@@ -18,7 +19,7 @@
             <a href="{% url 'filter_notes' %}?finished=False">Ongoing</a>
             <a href="{% url 'filter_notes' %}?finished=True">Finished</a>
             <div class="dropdown-priority">
-              <button class="dropdown-btn-priority">Categories</button>
+              <button class="dropdown-btn-priority" style="border-radius: 0%; width: 155px;">Categories</button>
               <div class="dropdown-content-priority">
                 {% for category in all_categories %}
                 <a href="{% url 'filter_notes' %}?category={{ category.name }}">{{ category.name }}</a>
@@ -26,7 +27,7 @@
               </div>
             </div>
             <div class="dropdown-priority">
-              <button class="dropdown-btn-priority" style="width: 155px; text-align: left;">Priority</button>
+              <button class="dropdown-btn-priority" style="width: 155px; text-align: left; border-radius: 0%;">Priority</button>
               <div class="dropdown-content-priority">
                 <a href="{% url 'filter_notes' %}?priority=4">Top</a>
                 <a href="{% url 'filter_notes' %}?priority=3">High</a>
@@ -36,6 +37,16 @@
             </div>
           </div>
         </div>
+        </div>
+            <div class="dropdown">
+              <div class="my-notes">
+              <button class="dropdown-btn"><i class="fa fa-plus"></i></button>
+                <div class="dropdown-content">
+                  <a href="http://127.0.0.1:8000/add_category/" style="text-decoration: none; color: black;">Category</a>
+                  <a href="http://127.0.0.1:8000/add_note/" style="color: black;">Note</a>
+                </div>
+                </div>
+            </div>
       </div>
 
   {% else %}
