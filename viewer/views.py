@@ -142,6 +142,10 @@ def filter_notes(request):
     category_name = request.GET.get('category')
     priority = request.GET.get('priority')
     finished = request.GET.get('finished')
+    user = request.user.customuser
+    city = user.city
+    weather_data = get_current_weather(city)
+    temperature = weather_data
 
     if category_name:
         notes = notes.filter(category__name=category_name)
@@ -154,9 +158,20 @@ def filter_notes(request):
 
     if weather:
         notes = notes.filter(preferred_weather=weather)
+        if weather == 'Cold (below 0°C)' and temperature >= 0:
+            caution = 'Not recommended due to current conditions.'
+        elif weather == 'Moderate (0-15°C)' and (0 > temperature >= 15):
+            caution = 'Not recommended due to current conditions.'
+        elif weather == 'Warm (16°C +)' and temperature <= 15:
+            caution = 'Not recommended due to current conditions.'
+        else:
+            caution = ''
+    else:
+        caution = ''
 
     context = {
-        'notes': notes
+        'notes': notes,
+        'caution': caution,
     }
     context.update(base_context(request))
     return render(request, 'filter_notes.html', context)

@@ -29,8 +29,9 @@
                 {% endif %}
             {% endif %}
             {% if note.preferred_weather %}
-            <p>Not recommended in current weather conditions.</p>
-            {% endif %}
+            {% if caution %}
+            <p>{{ caution }}</p>
+            {% endif %}{% endif %}
 
         </div>
         <div class="note-actions">
