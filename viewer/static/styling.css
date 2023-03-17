@@ -12,11 +12,16 @@ h3, h4 {
 
 body {
     margin: 0;
+    margin-top: 70px;
     background-image: url('background/background1.jpg' );
     background-size: cover;
 }
 
 nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 999;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -198,6 +203,7 @@ nav {
   margin: 0px 25px 25px 25px;
   overflow: hidden;
 }
+
 
 .note-content {
   margin-top: 50px;

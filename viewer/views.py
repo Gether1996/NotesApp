@@ -138,6 +138,7 @@ def note_detail(request, note_id):
 
 def filter_notes(request):
     notes = Note.objects.filter(user=request.user)
+    weather = request.GET.get('weather')
     category_name = request.GET.get('category')
     priority = request.GET.get('priority')
     finished = request.GET.get('finished')
@@ -150,6 +151,9 @@ def filter_notes(request):
 
     if finished is not None:
         notes = notes.filter(finished=finished)
+
+    if weather:
+        notes = notes.filter(preferred_weather=weather)
 
     context = {
         'notes': notes

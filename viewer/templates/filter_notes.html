@@ -28,6 +28,9 @@
                 <p style="position: relative; bottom: 0px;">Deadline: {{ note.scheduled_time }}</p>
                 {% endif %}
             {% endif %}
+            {% if note.preferred_weather %}
+            <p>Not recommended in current weather conditions.</p>
+            {% endif %}
 
         </div>
         <div class="note-actions">

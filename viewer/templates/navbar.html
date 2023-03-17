@@ -35,6 +35,14 @@
                 <a href="{% url 'filter_notes' %}?priority=1">Low</a>
               </div>
             </div>
+            <div class="dropdown-priority">
+              <button class="dropdown-btn-priority" style="width: 155px; text-align: left; border-radius: 0%;">Weather</button>
+              <div class="dropdown-content-priority">
+                <a href="{% url 'filter_notes' %}?weather=Warm (16%C2%B0C+%2B)">Warm</a>
+                <a href="{% url 'filter_notes' %}?weather=Moderate (0-15°C)">Moderate</a>
+                <a href="{% url 'filter_notes' %}?weather=Cold (below 0°C)">Cold</a>
+              </div>
+            </div>
           </div>
         </div>
         </div>
@@ -45,7 +53,7 @@
                   <a href="http://127.0.0.1:8000/add_category/" style="text-decoration: none; color: black;">Category</a>
                   <a href="http://127.0.0.1:8000/add_note/" style="color: black;">Note</a>
                 </div>
-                </div>
+              </div>
             </div>
       </div>
 
@@ -55,7 +63,7 @@
   </div>
   <div class="dropdown">
     <div class="my-notes">
-      <button class="dropdown-btn">User</button>
+      <button class="dropdown-btn" style="margin-right: 40px;">User</button>
         <div class="dropdown-content">
         {% if perms.viewer %}
           <a href="http://127.0.0.1:8000/admin">Admin</a>
