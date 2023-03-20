@@ -16,13 +16,14 @@
           <button class="dropdown-btn">My Notes</button>
           <div class="dropdown-content">
             <a href="{% url 'user_notes' %}">All notes</a>
+            <a href="{% url 'filter_notes' %}?category=all">All categories</a>
             <a href="{% url 'filter_notes' %}?finished=False">Ongoing</a>
             <a href="{% url 'filter_notes' %}?finished=True">Finished</a>
             <div class="dropdown-priority">
               <button class="dropdown-btn-priority" style="border-radius: 0%; width: 155px;">Categories</button>
               <div class="dropdown-content-priority">
                 {% for category in all_categories %}
-                <a href="{% url 'filter_notes' %}?category={{ category.name }}">{{ category.name }}</a>
+                <a href="{% url 'filter_notes' %}?category_name={{ category.name }}">{{ category.name }}</a>
                 {% endfor %}
               </div>
             </div>

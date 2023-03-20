@@ -6,7 +6,7 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'styling.css' %}">
   <div>
-    <form method="post" action="{% url 'edit_note' note_id %}" style="margin: 30px; font-size: 24px;">
+    <form method="post" action="{% url 'edit_category' category_id %}" style="margin: 30px; font-size: 24px;" >
       {% csrf_token %}
       <table>{{ form }}</table>
       <button type="submit" class="sign_up_btn">Save</button>

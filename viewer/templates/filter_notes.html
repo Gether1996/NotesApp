@@ -8,6 +8,24 @@
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 
 </head>
+    {% if category == "all" %}
+        <h1>All categories</h1>
+        {% for category in all_categories %}
+    <div style="display: block;">
+        <h2 style="display: inline-block;">{{ category.name }}
+            <div class="note-actions" style="display: inline-block;">
+                <a href="http://127.0.0.1:8000/categories/{{ category.id }}/edit/"><button class="edit-note"><i class="fa fa-pencil"></i></button></a>
+                <form style="display: inline-block;" method="post" action="{% url 'delete_category' category.id %}" onsubmit="return confirm('This will delete all notes in this category too, are you sure?')">
+                  {% csrf_token %}
+                  <button class="delete-note"><i class="fa fa-times"></i></button>
+                </form>
+            </div>
+        </h2>
+    </div>
+        {% endfor %}
+    {% endif %}
+
+    {% if notes %}
   <h1>Filtered Notes</h1>
 
     {% for note in notes %}
@@ -30,7 +48,7 @@
             {% endif %}
             {% if note.preferred_weather %}
             {% if caution %}
-            <p>{{ caution }}</p>
+            <p style="color: red;">{{ caution }}</p>
             {% endif %}{% endif %}
 
         </div>
@@ -49,7 +67,11 @@
             <a href="http://127.0.0.1:8000/note_detail/{{ note.id }}"><button class="note-details"><i class='fa fa-info'></i></button></a>
         </div>
     </div>
-    {% empty %}
-      <p style="margin-left: 25px; font-size: 25px;">No notes found</p>
+
+
     {% endfor %}
+    {% elif not notes and not category %}
+      <p style="margin-left: 25px; font-size: 25px;">No notes found</p>
+    {% endif %}
+
 {% endblock %}

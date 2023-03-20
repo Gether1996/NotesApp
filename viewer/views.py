@@ -77,6 +77,32 @@ def add_category(request):
     return render(request, 'add_category.html', context)
 
 
+def edit_category(request, category_id):
+    category = get_object_or_404(Category, pk=category_id)
+    if request.method == 'POST':
+        form = CategoryForm(request.POST, request.FILES, instance=category)
+        if form.is_valid():
+            form.save()
+            return redirect('user_notes')
+    else:
+        form = CategoryForm(instance=category)
+    context = {
+        'form': form,
+        'category_id': category_id
+    }
+    context.update(base_context(request))
+    return render(request, 'edit_category.html', context)
+
+
+def delete_category(request, category_id):
+    category = get_object_or_404(Category, pk=category_id)
+    notes = Note.objects.filter(category=category)
+    if request.method == 'POST':
+        category.delete()
+        notes.delete()
+        return redirect('user_notes')
+
+
 @login_required
 def add_note(request):
     if request.method == 'POST':
@@ -138,14 +164,24 @@ def note_detail(request, note_id):
 
 def filter_notes(request):
     notes = Note.objects.filter(user=request.user)
+    category = request.GET.get('category')
     weather = request.GET.get('weather')
-    category_name = request.GET.get('category')
+    category_name = request.GET.get('category_name')
     priority = request.GET.get('priority')
     finished = request.GET.get('finished')
     user = request.user.customuser
     city = user.city
     weather_data = get_current_weather(city)
     temperature = weather_data
+
+    if category == "all":
+        all_categories = Category.objects.all()
+        context = {
+            'category': category,
+            'all_categories': all_categories,
+        }
+        context.update(base_context(request))
+        return render(request, 'filter_notes.html', context)
 
     if category_name:
         notes = notes.filter(category__name=category_name)
@@ -159,11 +195,11 @@ def filter_notes(request):
     if weather:
         notes = notes.filter(preferred_weather=weather)
         if weather == 'Cold (below 0°C)' and temperature >= 0:
-            caution = 'Not recommended due to current conditions.'
+            caution = 'Not recommended due to current weather conditions.'
         elif weather == 'Moderate (0-15°C)' and (0 > temperature >= 15):
-            caution = 'Not recommended due to current conditions.'
+            caution = 'Not recommended due to current weather conditions.'
         elif weather == 'Warm (16°C +)' and temperature <= 15:
-            caution = 'Not recommended due to current conditions.'
+            caution = 'Not recommended due to current weather conditions.'
         else:
             caution = ''
     else:

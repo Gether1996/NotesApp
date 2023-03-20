@@ -54,9 +54,3 @@
 
 </body>
 {% endblock %}
-
-
-<form method="post" action="{% url 'delete_note' note.id %}" onsubmit="return confirm('Are you sure you want to delete this note?')">
-  {% csrf_token %}
-  <button class="finish-note"><i class='fa fa-check-square'></i></button>
-</form>
