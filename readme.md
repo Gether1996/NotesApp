@@ -7,6 +7,7 @@
 - Homepage with greetings and your currently lowest-time remaining note
 - My Notes with view of all your notes in database
 - Navigation bar with Home (homepage), My Notes (filters) and a + icon, where you can add Category or Note
+- weather API based on users City, filled upon registration
 - Adding category is just name, to add Note you will choose from:
   - name
   - category
@@ -27,6 +28,8 @@
 - If content of Note is too big, you can scroll in it
 - In Weather filtering, if preferred weather is Cold and current temperature of user isn't in that range, caution will arise
 
+ # Homepage
+![Homepage](screenz/homepage.jpg)
 
  # All notes
 ![Homepage](screenz/all_notes.jpg)
@@ -45,3 +48,6 @@
 
  # Ongoing / Finished
 ![Homepage](screenz/ongoing+finished.jpg)
+
+ # Registration
+![Homepage](screenz/registration.jpg)
